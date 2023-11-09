@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ファイルの拡張子変更</title>
+</head>
+<body>
+    <input type="file" id="fileInput">
+    <input type="text" id="extensionInput" placeholder="新しい拡張子">
+    <button onclick="changeExtension()">拡張子変更</button>
+
+    <script>
+        function changeExtension() {
+            var fileInput = document.getElementById("fileInput");
+            var extensionInput = document.getElementById("extensionInput");
+
+            var file = fileInput.files[0];
+            var newExtension = extensionInput.value;
+
+            if (file && newExtension) {
+                var fileName = file.name;
+                var currentExtension = fileName.split('.').pop();
+
+                if (currentExtension !== newExtension) {
+                    var newFileName = fileName.replace("." + currentExtension, "." + newExtension);
+                    var newFile = new File([file], newFileName, { type: file.type });
+
+                    // ファイルの拡張子を変更するために新しいファイルを作成します
+                    // ここで新しいファイルを使用して他の処理を行うことができます
+
+                    console.log("新しいファイル名:", newFileName);
+                } else {
+                    console.log("現在の拡張子と同じ拡張子です");
+                }
+            } else {
+                console.log("ファイルまたは新しい拡張子が指定されていません");
+            }
+        }
+    </script>
+</body>
+</html>
